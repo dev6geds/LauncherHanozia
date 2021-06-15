@@ -1,0 +1,28 @@
+{
+  "name": "launcher",
+  "version": "1.0.0",
+  "description": "Launcher Hanozia",
+  "main": "index.js",
+  "scripts": {
+    "test": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dev6geds/LauncherHanozia.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dev6geds/LauncherHanozia/issues"
+  },
+  "homepage": "https://github.com/dev6geds/LauncherHanozia#readme",
+  "devDependencies": {
+    "electron": "^13.1.2",
+    "electron-builder": "^19.7.3"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "custom-electron-titlebar": "^3.2.7",
+    "minecraft-launcher-core": "^3.16.3"
+  }
+}
