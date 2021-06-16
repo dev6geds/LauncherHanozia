@@ -1,21 +1,23 @@
-const {app, BrowserWindow, ipcMain } = require('electron')
-const path = require('path')
+const {app, BrowserWindow, ipcMain } = require('electron');
+const path = require('path');
 const { Client, Authenticator } = require('minecraft-launcher-core');
 const launcher = new Client();
 function createWindow () {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-      title : "ok",
+      title : "Chargement...",
       //icon: path.join(__dirname, "/asset/logo.ico"),
-    width: 800,
-    height: 600,
+    width: 1200,
+    height: 800,
     webPreferences: {
-      nodeIntegration: true
-    }
+      nodeIntegration: true,
+      contextIsolation: false,
+      enableRemoteModule: true,
+    },
   })
 
   // and load the index.html of the app.
-  mainWindow.loadURL(path.join(__dirname, "index.html"))
+  mainWindow.loadURL("https://hanozia.fr/sign-in/");
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
@@ -46,12 +48,12 @@ ipcMain.on("login",(event, data) => {
     Authenticator.getAuth(data.u).then(() => {
         event.sender.send("done");
           let opts = {
-        clientPackage: "https://hanozia.fr/modpack.zip",
+        clientPackage:null,
         // For production launchers, I recommend not passing 
         // the getAuth function through the authorization field and instead
         // handling authentication outside before you initialize
         // MCLC so you can handle auth based errors and validation!
-        authorization: Authenticator.getAuth("username"),
+        authorization: Authenticator.getAuth("6Jeads"),
         root: "./minecraft",
       
         version: {
@@ -70,9 +72,16 @@ ipcMain.on("login",(event, data) => {
     
     launcher.on('debug', (e) => console.log(e));
     launcher.on('data', (e) => console.log(e));
+    launcher.on('progress', (e) => {
+
+      console.log(e);
+      event.sender.send("pregress",e);
+    
+    });
     }).catch((err)=>{
 
     });
+
 
   
 })
